@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './style.scss';
 import {
   ReplyIcon,
@@ -9,6 +9,15 @@ import {
 } from './icons.js';
 
 export default function App() {
+  const [name, setName] = useState();
+  const [username, setUsername] = useState();
+  const [isVerified, setIsVerified] = useState(false);
+  const [tweet, setTweet] = useState();
+  const [avatar, setAvatar] = useState();
+  const [retweets, setRetweets] = useState(0);
+  const [quoteTweets, setQuoteTweets] = useState(0);
+  const [likes, setLikes] = useState(0);
+
   return (
     <>
       <div className="tweet-settings">
@@ -20,24 +29,24 @@ export default function App() {
             <img src="https://pbs.twimg.com/profile_images/1548325430934941698/2kCBjJBG_normal.jpg" />
             <div>
               <div className="name">
-                Furkan Ulutaş
-                <VerifiedIcon width="19" height="19" />
+                {name || 'Ad Soyad'}
+                {isVerified && <VerifiedIcon width="19" height="19" />}
               </div>
-              <div className="username">@furkanulutasx</div>
+              <div className="username">@{username || 'kullaniciadi'}</div>
             </div>
           </div>
           <div className="tweet-content">
-            <p>Bu tweet fake tweet generator uygulaması için atılmıştır :)</p>
+            <p>{tweet || 'Bu alana örnek tweet eklenecek.'}</p>
           </div>
           <div className="tweet-stats">
             <span>
-              <b>24</b> Retweet
+              <b>{retweets}</b> Retweet
             </span>
             <span>
-              <b>2</b> Alıntı Tweetler
+              <b>{quoteTweets}</b> Alıntı Tweetler
             </span>
             <span>
-              <b>24</b> Beğeni
+              <b>{likes}</b> Beğeni
             </span>
           </div>
           <div className="tweet-actions">

@@ -25,6 +25,15 @@ body {
   color: #fff;
   border-right: 1px solid #2f3336;
   height: 100%;
+  padding: 25px;
+
+  h3 {
+    font-size: 24px;
+    font-weight: normal;
+    border-bottom: 1px solid #2f3336;
+    padding-bottom: 20px;
+    margin-bottom: 20px;
+  }
 }
 
 .tweet-container {
@@ -56,6 +65,7 @@ body {
       font-weight: 700;
       display: flex;
       align-items: center;
+      height: 19px;
 
       svg {
         margin-left: 3px;
