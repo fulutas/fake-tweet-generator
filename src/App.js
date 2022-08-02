@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, createRef, useEffect } from 'react';
 import './style.scss';
 import {
   ReplyIcon,
@@ -9,6 +9,7 @@ import {
 } from './icons.js';
 
 import { AvatarLoader } from './loaders';
+import { useScreenshot } from 'use-react-screenshot';
 
 // 1 regex - @ işaretinden sonraki tüm karakterleri span etiketine ekler. gi tüm tweet içerisindeki bulduğu herşeye uygulaması için.
 
@@ -40,6 +41,9 @@ const formatNumber = (number) => {
 };
 
 export default function App() {
+  const tweetRef = createRef(null); // Tweet div
+  const downloadRef = createRef(); // Tweet indir a tag
+
   const [name, setName] = useState();
   const [username, setUsername] = useState();
   const [isVerified, setIsVerified] = useState(false);
@@ -48,6 +52,15 @@ export default function App() {
   const [retweets, setRetweets] = useState(0);
   const [quoteTweets, setQuoteTweets] = useState(0);
   const [likes, setLikes] = useState(0);
+  const [image, takeScreenshot] = useScreenshot();
+
+  const getImage = () => takeScreenshot(tweetRef.current);
+
+  useEffect(() => {
+    if (image) {
+      downloadRef.current.click(); // Oluştur tıklandığında otomatik görüntüyü indirir.
+    }
+  }, [image]);
 
   const avatarHandle = (e) => {
     const file = e.target.files[0];
@@ -128,11 +141,18 @@ export default function App() {
               onChange={(e) => setLikes(e.target.value)}
             />
           </li>
-          <button>Oluştur</button>
+          <button onClick={getImage}>Oluştur</button>
+          <div className="download-url">
+            {image && (
+              <a ref={downloadRef} href={image} download="tweet.png">
+                Tweeti İndir
+              </a>
+            )}
+          </div>
         </ul>
       </div>
       <div className="tweet-container">
-        <div className="tweet">
+        <div className="tweet" ref={tweetRef}>
           <div className="tweet-author">
             {(avatar && <img src={avatar} />) || <AvatarLoader />}
             <div>
