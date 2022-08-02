@@ -1,3 +1,2 @@
-# react-sb67wj
+# React Fake Tweet Generator
 
-[Edit on StackBlitz ⚡️](https://stackblitz.com/edit/react-sb67wj)
