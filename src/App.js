@@ -22,6 +22,21 @@ const tweetFormat = (tweet) => {
   return tweet;
 };
 
+const formatNumber = (number) => {
+  if (!number) {
+    number = 0;
+  }
+  if (number < 1000) {
+    return number;
+  }
+
+  number /= 1000;
+  number = String(number).split('.');
+  return (
+    number[0] + (number[1] > 100 ? ',' + number[1].slice(0, 1) + ' B' : ' B')
+  );
+};
+
 export default function App() {
   const [name, setName] = useState();
   const [username, setUsername] = useState();
@@ -38,38 +53,66 @@ export default function App() {
         <h3>Tweet Ayarları</h3>
         <ul>
           <li>
+            <label>Ad Soyad</label>
             <input
               type="text"
               className="input"
-              placeholder="Ad Soyad"
               value={name}
               onChange={(e) => setName(e.target.value)}
             />
           </li>
           <li>
+            <label>Kullanıcı Adı</label>
             <input
               type="text"
               className="input"
-              placeholdeR="Kullanıcı Adı"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
             />
           </li>
           <li>
+            <label>Tweet</label>
             <textarea
               className="textarea"
               maxLength="290"
-              placeholder="Tweet"
               value={tweet}
               onChange={(e) => setTweet(e.target.value)}
             />
           </li>
+          <li>
+            <label>Retweet</label>
+            <input
+              type="number"
+              className="input"
+              value={retweets}
+              onChange={(e) => setRetweets(e.target.value)}
+            />
+          </li>
+          <li>
+            <label>Alıntı Tweetler</label>
+            <input
+              type="number"
+              className="input"
+              value={quoteTweets}
+              onChange={(e) => setQuoteTweets(e.target.value)}
+            />
+          </li>
+          <li>
+            <label>Beğeni</label>
+            <input
+              type="number"
+              className="input"
+              value={likes}
+              onChange={(e) => setLikes(e.target.value)}
+            />
+          </li>
+          <button>Oluştur</button>
         </ul>
       </div>
       <div className="tweet-container">
         <div className="tweet">
           <div className="tweet-author">
-            <img src="https://pbs.twimg.com/profile_images/1548325430934941698/2kCBjJBG_normal.jpg" />
+            <img src={avatar} />
             <div>
               <div className="name">
                 {name || 'Ad Soyad'}
@@ -89,13 +132,13 @@ export default function App() {
           </div>
           <div className="tweet-stats">
             <span>
-              <b>{retweets}</b> Retweet
+              <b>{formatNumber(retweets)}</b> Retweet
             </span>
             <span>
-              <b>{quoteTweets}</b> Alıntı Tweetler
+              <b>{formatNumber(quoteTweets)}</b> Alıntı Tweetler
             </span>
             <span>
-              <b>{likes}</b> Beğeni
+              <b>{formatNumber(likes)}</b> Beğeni
             </span>
           </div>
           <div className="tweet-actions">

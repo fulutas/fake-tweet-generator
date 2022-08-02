@@ -47,6 +47,13 @@ body {
     }
   }
 
+  label {
+    font-size: 15px;
+    margin-bottom: 5px;
+    display: block;
+    color: #6e767d;
+  }
+
   .input {
     width: 100%;
     background: transparent;
@@ -62,6 +69,16 @@ body {
     &:focus {
       border-color: #4e555a;
     }
+  }
+
+  button {
+    width: 100%;
+    height: 40px;
+    border-radius: 3px;
+    font-size: 16px;
+    color: #fff;
+    cursor: pointer;
+    background-color: #1da1f2;
   }
 
   .textarea {
