@@ -8,6 +8,8 @@ import {
   VerifiedIcon,
 } from './icons.js';
 
+import { AvatarLoader } from './loaders';
+
 // 1 regex - @ işaretinden sonraki tüm karakterleri span etiketine ekler. gi tüm tweet içerisindeki bulduğu herşeye uygulaması için.
 
 // 2 regex - # işaretinden a-z tüm harfler ve türkçe harflerde de uygulanması için kullanıldı.
@@ -47,6 +49,17 @@ export default function App() {
   const [quoteTweets, setQuoteTweets] = useState(0);
   const [likes, setLikes] = useState(0);
 
+  const avatarHandle = (e) => {
+    const file = e.target.files[0];
+    const reader = new FileReader();
+
+    reader.addEventListener('load', function () {
+      setAvatar(this.result);
+    });
+
+    reader.readAsDataURL(file);
+  };
+
   return (
     <>
       <div className="tweet-settings">
@@ -77,6 +90,15 @@ export default function App() {
               maxLength="290"
               value={tweet}
               onChange={(e) => setTweet(e.target.value)}
+            />
+          </li>
+          <li>
+            <label htmlFor="avatar">Avatar</label>
+            <input
+              id="avatar"
+              type="file"
+              className="input"
+              onChange={avatarHandle}
             />
           </li>
           <li>
@@ -112,7 +134,7 @@ export default function App() {
       <div className="tweet-container">
         <div className="tweet">
           <div className="tweet-author">
-            <img src={avatar} />
+            {(avatar && <img src={avatar} />) || <AvatarLoader />}
             <div>
               <div className="name">
                 {name || 'Ad Soyad'}
