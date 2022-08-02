@@ -116,10 +116,36 @@ body {
 
 .tweet-container {
   padding: 0 30px;
+
+  .fetch-info {
+    margin-bottom: 30px;
+    width: 100%;
+    display: flex;
+
+    input {
+      flex: 1;
+      background: #2f3336;
+      height: 40px;
+      line-height: 40px;
+      border-radius: 3px 0 0 3px;
+      color: #fff;
+      padding: 0 15px;
+      font-size: 15px;
+    }
+    button {
+      height: 40px;
+      padding: 0 20px;
+      font-size: 15px;
+      background-color: #1da1f2;
+      color: #fff;
+      border-radius: 0 3px 3px 0;
+      cursor: pointer;
+    }
+  }
 }
 
 .tweet {
-  border: 1px solid #c7cdd1;
+  border: 1px solid #2f3336;
   width: 600px;
   margin: 25px auto;
   padding: 0 16px;
