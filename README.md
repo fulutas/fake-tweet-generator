@@ -1,3 +1,3 @@
 # React Fake Tweet Generator
 
-![Demo][https://fake-tweet-generator-eta.vercel.app/]
+## [Demo](https://fake-tweet-generator-eta.vercel.app)
